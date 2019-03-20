@@ -2,29 +2,101 @@
 <!DOCTYPE html>
 <html>
 <!-- test-->
-  <head>
-    <script src="jquery.js"></script>
-    <script src="data_generator.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
-  </head>
-  <body>
-    <script>
+<head>
+  <script src="jquery.js"></script>
+  <script src="data_generator.js"></script>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+  <header><h1>Twiddler</h1></header>
+  
+  <script>
+    var filter = undefined;
+    $(document).ready(function(){
+      var $body = $('body');
+      $body.html('');
 
-      $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
+      
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
+      var $header = $('header');
+
+      var $streams = $("<div class='stream-container'> </div>");
+      $streams.appendTo($body);
+
+      setInterval(function(){
+        var tweets;
+        if (filter === undefined){
+          tweets = streams.home;
         }
+        else {
+          tweets = streams.users[filter];
+        }
+        streamTweets(tweets, $streams);
+
+      }, 3000);
 
       });
 
+
+
+      function streamTweets(tweets, $streams){
+
+        $streams.html('');
+
+        var index = tweets.length - 1;
+
+        while(index >= 0){
+          var tweet = tweets[index];
+          var $tweet = $('<div class="tweet"</div>');
+
+
+          //user
+          let user = tweet.user;
+          var $userTweet = $('<span id="user"></span>');
+          $userTweet.text('@' + tweet.user);
+          $userTweet.appendTo($tweet);
+
+
+          //click on user changes twitt filter
+
+          $userTweet.click(function(){
+            filter = user;
+            
+          })
+         
+
+          //post Time
+          var $timeAndDate = $('<span id="postedTime"></span>');
+          $timeAndDate.text(formatTimeAndDate(tweet.created_at));
+          $timeAndDate.appendTo($tweet);
+
+          //userText
+          var $message = $('<p id="message"></p>');
+          $message.text(tweet.message);
+          $message.appendTo($tweet);
+
+          $tweet.appendTo($streams); //refresh
+          index -= 1;
+        }
+      }
+
+        //6:48 AM - 16 Mar 2019
+        function formatTimeAndDate(postTime){
+          var date = (postTime.getMonth() + 1) + '/' + postTime.getDate() + '/' + postTime.getFullYear();
+          var hours = postTime.getHours() < 10 ? "0" + postTime.getHours() : postTime.getHours();
+          hours = ((hours + 11) % 12 + 1); 
+          var suffix = (hours >= 12)? 'pm' : 'am';
+          var minutes = postTime.getMinutes() < 10 ? "0" + postTime.getMinutes() : postTime.getMinutes();
+          var seconds = postTime.getSeconds() < 10 ? "0" + postTime.getSeconds() : postTime.getSeconds();
+
+          return " ᛫ "+date +" "+ hours + ":" + minutes + ":" + seconds +" " + suffix ;
+
+        }
+
+  
+
+      
+
     </script>
   </body>
-</html>
+  </html>
