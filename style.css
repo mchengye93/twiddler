@@ -16,10 +16,22 @@ div {
 	background: #e6ecf0;
 }
 .tweet {
+	width: 500px;
 	background: white;
-	margin: 2px;
+	margin: auto;
+	border-bottom: 2px solid grey;
+
 }
 .tweet:hover {
 	background: #f5f8fa;
 
+}
+
+#user {
+	font-weight: bold;
+}
+
+#user:hover{
+	color:#3eabf3;
+	text-decoration: underline;
 }
