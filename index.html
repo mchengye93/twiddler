@@ -1,7 +1,7 @@
 <!-- Marbo Cheng Ye-->
 <!DOCTYPE html>
 <html>
-<!-- test-->
+
 <head>
   <script src="jquery.js"></script>
   <script src="data_generator.js"></script>
@@ -9,21 +9,44 @@
   <title>Twiddler</title>
 </head>
 <body>
-  <header><h1>Twiddler</h1></header>
   
+  <header> </header>
   <script>
     var filter = undefined;
+
     $(document).ready(function(){
       var $body = $('body');
       $body.html('');
 
-      
 
       var $header = $('header');
+      var $logo= $("<header><img src='twiddlerlogo.svg' alt='Twiddler logo'/> </header>");
+      $logo.appendTo($body);
+
+      var $headerTitle = $("<h1 class='logo'>Twiddler</h1>");
+      $headerTitle.appendTo($logo);
+
+      var $trendContainer = $("<div class='trend'></div>");
+      $trendContainer.appendTo($body);
+
+      var $trendList = $("<ul><b>Trending</b><li>#InAWorldWithNoTwitter</li><li>Trump</li><li>#NoToGun</li><li>#LGBTQ</li><li>Asia</li></ul>");
+      $trendList.appendTo($trendContainer);
 
       var $streams = $("<div class='stream-container'> </div>");
       $streams.appendTo($body);
 
+    
+      var tweets = streams.home;
+      streamTweets(tweets, $streams);
+
+
+      var $followContainer = $("<div class='follow'></div>");
+      $followContainer.appendTo($body);
+
+      var $followList = $("<ul><b>Who to follow</b><li>Lady Gaga</li><li>Trump</li><li>Obama</li><li>Ophrah</li><li>CNN</li></ul>");
+      $followList.appendTo($followContainer);
+
+/*
       setInterval(function(){
         var tweets;
         if (filter === undefined){
@@ -35,7 +58,7 @@
         streamTweets(tweets, $streams);
 
       }, 3000);
-
+*/
       });
 
 
@@ -81,7 +104,6 @@
         }
       }
 
-        //6:48 AM - 16 Mar 2019
         function formatTimeAndDate(postTime){
           var date = (postTime.getMonth() + 1) + '/' + postTime.getDate() + '/' + postTime.getFullYear();
           var hours = postTime.getHours() < 10 ? "0" + postTime.getHours() : postTime.getHours();
@@ -90,6 +112,7 @@
           var minutes = postTime.getMinutes() < 10 ? "0" + postTime.getMinutes() : postTime.getMinutes();
           var seconds = postTime.getSeconds() < 10 ? "0" + postTime.getSeconds() : postTime.getSeconds();
 
+          // 3/16/2019 6:10:20
           return " ᛫ "+date +" "+ hours + ":" + minutes + ":" + seconds +" " + suffix ;
 
         }

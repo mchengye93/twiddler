@@ -5,6 +5,13 @@
 body{
 	background: #e6ecf0;
 }
+.logo{
+	text-align: center;
+	margin: 5px 5px;
+	color: #3eabf3;
+}
+
+
 div {
 	background: white;
 	font-family: Georgia;
@@ -12,11 +19,48 @@ div {
 	padding: 5px;
 }
 
+ul{
+	list-style-type:none;
+}
+.trend li {
+	padding:10px;
+	color:#3eabf3;;
+}
+li:hover {
+	color:#3eabf3;;
+	text-decoration: underline;
+
+}
+
+.follow li {
+	padding:10px;
+	
+}
+
+img{
+  width: 65px;
+  height: auto;
+  margin: auto;
+  display: block;
+}
+.trend {
+	float: left;
+	width: 25%;
+	margin-top: 5px;
+}
 .stream-container {
 	background: #e6ecf0;
+	float:left;
+	width: 50%;
+}
+
+.follow {
+	float: left;
+	width: 25%;
+	margin-top: 5px;
 }
 .tweet {
-	width: 500px;
+	
 	background: white;
 	margin: auto;
 	border-bottom: 2px solid grey;
